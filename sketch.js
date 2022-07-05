@@ -1,4 +1,4 @@
-let cloudOffset, sunImage, moonImage, timeOffset, flowerColour;
+let cloudOffset, sunImage, moonImage, timeOffset, flowerColour, flowerHeight;
 
 function setup() {
 	createCanvas(600, 400);
@@ -8,6 +8,7 @@ function setup() {
 	moonImage = loadImage("moon.png");
 	flowerColour = createColorPicker("#F97373");
 	flowerColour.position(150, height + 10);
+	flowerHeight = 100;
 }
 
 function draw() {
@@ -100,13 +101,24 @@ function draw() {
 	noStroke();
 	for (let flowerCount = 0; flowerCount < 3; flowerCount++) {
 		fill("#56AD54");
-		rect(125 + flowerCount * 80, 250, 20, 100);
+		rect(125 + flowerCount * 80, 250 - flowerHeight + 100, 20, flowerHeight);
 		fill("#F6F173");
-		circle(135 + flowerCount * 80, 250, 40);
+		circle(135 + flowerCount * 80, 250 - flowerHeight + 100, 40);
 		fill(flowerColour.color());
-		circle(120 + flowerCount * 80, 230, 37);
-		circle(150 + flowerCount * 80, 230, 37);
-		circle(120 + flowerCount * 80, 265, 37);
-		circle(150 + flowerCount * 80, 265, 37);
+		circle(120 + flowerCount * 80, 230 - flowerHeight + 100, 37);
+		circle(150 + flowerCount * 80, 230 - flowerHeight + 100, 37);
+		circle(120 + flowerCount * 80, 265 - flowerHeight + 100, 37);
+		circle(150 + flowerCount * 80, 265 - flowerHeight + 100, 37);
+	}
+
+	// --- CHANGE FLOWER HEIGHT ---
+	if (flowerHeight >= 10 && flowerHeight <= 300) {
+		if (keyIsPressed) {
+			if (keyCode === 87) flowerHeight++;
+			else if (keyCode === 83) flowerHeight--;
+		} else keyCode = 0;
+	} else {
+		if (flowerHeight < 11) flowerHeight = 12;
+		if (flowerHeight > 299) flowerHeight = 298;
 	}
 }
