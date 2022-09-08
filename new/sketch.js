@@ -1,6 +1,6 @@
 /*
-Global Variables are declared in CAPITAL LETTERS
-Local Variables are declared in lower_case_with_underscores
+Global Variables are declared in CAPITAL_LETTERS
+Local Variables are declared in lower_case
 Functions are declared in camelCase
 */
 
