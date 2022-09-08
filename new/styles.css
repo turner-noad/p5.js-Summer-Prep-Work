@@ -2,3 +2,87 @@ body,
 html {
 	margin: 0;
 }
+
+canvas {
+	display: block;
+	border: 5px solid #47474e;
+	border-radius: 1.5rem;
+}
+
+.flex-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1 {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	font-size: 30px;
+}
+
+h2 {
+	margin: 0;
+	text-align: center;
+	font-weight: 600;
+	margin-bottom: 2rem;
+	font-size: 20px;
+}
+
+input {
+	display: block !important;
+}
+
+.bottom_box {
+	display: flex;
+}
+
+.features {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	margin-top: 1rem;
+	padding-bottom: 1rem;
+	width: 50%;
+	border: 2px solid #47474e;
+	border-radius: 1rem;
+}
+
+li {
+	margin-left: 1rem;
+	font-weight: 400;
+	margin-bottom: 0.5rem;
+	font-size: 15px;
+}
+
+.features-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	font-size: 30px;
+}
+
+.colour_box {
+	margin-right: 1rem;
+	margin-left: 1rem;
+	margin-top: 1rem;
+	padding-bottom: 1rem;
+	width: 50%;
+	border: 2px solid #47474e;
+	border-radius: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.colour-title {
+	padding: 1rem;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	font-size: 30px;
+}

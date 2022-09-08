@@ -1,26 +1,36 @@
 /*
-Global Variables are declared in CAPITAL LETTERS
-Local Variables are declared in lower_case_with_underscores
+Global Variables are declared in CAPITAL_LETTERS
+Local Variables are declared in lower_case
 Functions are declared in camelCase
 */
 
-let TIME, SUN_IMAGE, MOON_IMAGE, FLOWER_HEIGHT, CURRENT_SKYBOX;
+let TIME, SUN_IMAGE, MOON_IMAGE, CURRENT_SKYBOX;
 let CLOUD_ONE, CLOUD_TWO, CLOUD_THREE;
 let FLOWER_ONE, FLOWER_TWO;
+let FLOWER_HEIGHT;
+let COLOUR_PICKER;
 let SKY_COLOURS = ["#7ad2eb", "#63abbf", "#4a808f", "#365e69", "#26424a", "#26374a"];
 
 function setup() {
+	/* Create Canvas */
 	createCanvas(600, 400);
 
+	/* Initialise Variables */
 	CURRENT_SKYBOX = SKY_COLOURS[0];
 	TIME = -50;
 	SUN_IMAGE = loadImage("sun.png");
 	MOON_IMAGE = loadImage("moon.png");
 	FLOWER_HEIGHT = 100;
 
+	/* Create Objects */
 	CLOUD_ONE = new Cloud(0);
 	CLOUD_TWO = new Cloud(1);
 	CLOUD_THREE = new Cloud(2);
+	FLOWER_ONE = new Flower(125, 350);
+	FLOWER_TWO = new Flower(250, 350);
+
+	/* Create Colour Picker */
+	COLOUR_PICKER = createColorPicker("#F97373");
 }
 
 function draw() {
@@ -53,6 +63,21 @@ function draw() {
 
 	/* Draw Barn */
 	drawBarn();
+
+	/* Draw Flowers */
+	FLOWER_ONE.draw();
+	FLOWER_TWO.draw();
+
+	/* Change Flower Height */
+	if (FLOWER_HEIGHT >= 10 && FLOWER_HEIGHT <= 300) {
+		if (keyIsPressed) {
+			if (keyCode === 87) FLOWER_HEIGHT++;
+			else if (keyCode === 83) FLOWER_HEIGHT--;
+		} else keyCode = 0;
+	} else {
+		if (FLOWER_HEIGHT < 11) FLOWER_HEIGHT = 12;
+		if (FLOWER_HEIGHT > 299) FLOWER_HEIGHT = 298;
+	}
 }
 
 function drawSunMoon() {
@@ -198,5 +223,41 @@ class Cloud {
 }
 
 class Flower {
-	constructor() {}
+	constructor(flower_x, flower_y) {
+		this.origin = createVector(flower_x, flower_y);
+		this.position = createVector();
+		this.length = FLOWER_HEIGHT;
+		this.angle = 3.4;
+		this.direction = "right";
+	}
+
+	draw() {
+		stroke("#56AD54");
+		strokeWeight(8);
+		line(this.origin.x, this.origin.y, this.position.x, this.position.y);
+		noStroke();
+		fill(COLOUR_PICKER.color());
+		circle(this.position.x - 15, this.position.y + 15, 40);
+		circle(this.position.x + 15, this.position.y + 15, 40);
+		circle(this.position.x - 15, this.position.y - 15, 40);
+		circle(this.position.x + 15, this.position.y - 15, 40);
+		fill("#F6F173");
+		circle(this.position.x, this.position.y, 25);
+
+		this.length = FLOWER_HEIGHT;
+		this.position.x = this.length * sin(this.angle) + this.origin.x;
+		this.position.y = this.length * cos(this.angle) + this.origin.y;
+
+		if (this.direction === "left") {
+			this.angle += 0.0025;
+			if (this.angle >= 3.4) {
+				this.direction = "right";
+			}
+		} else if (this.direction === "right") {
+			this.angle -= 0.0025;
+			if (this.angle <= 2.85) {
+				this.direction = "left";
+			}
+		}
+	}
 }
