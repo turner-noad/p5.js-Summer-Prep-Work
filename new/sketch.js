@@ -227,7 +227,7 @@ class Flower {
 		this.origin = createVector(flower_x, flower_y);
 		this.position = createVector();
 		this.length = FLOWER_HEIGHT;
-		this.angle = 3.4;
+		this.angle = random(2.85, 3.4);
 		this.direction = "right";
 	}
 
